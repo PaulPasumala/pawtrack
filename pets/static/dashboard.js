@@ -17,8 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function lockDashboardScale() {
-        const targetWidth = 1920; 
         const currentWidth = window.innerWidth;
+
+        // --- NEW RULE: Turn off scaling for mobile phones! ---
+        if (currentWidth <= 768) {
+            document.body.style.zoom = '1';
+            document.body.style.width = '100vw';
+            document.body.style.height = '100vh';
+            if (navigator.userAgent.toLowerCase().includes('firefox')) {
+                document.body.style.transform = 'none';
+            }
+            return; // This stops the rest of the desktop scaling logic
+        }
+
+        // --- Original Desktop Scaling Logic ---
+        const targetWidth = 1920; 
         const scaleRatio = currentWidth / targetWidth;
 
         document.body.style.zoom = scaleRatio;
@@ -30,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.transform = `scale(${scaleRatio})`;
             document.body.style.transformOrigin = 'top left';
         }
-        
     }
    
     let popupTimer;
