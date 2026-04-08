@@ -4122,8 +4122,13 @@ body {
     /* Stacks the Pet List */
     .pets-list-panel {
         width: 100% !important;
+        height: auto !important; /* Forces the box to stay open */
+        flex: none !important;   /* Stops the desktop stretching rule */
     }
+    
     .your-pets-selector {
+        flex: none !important;   /* Stops the text inside from collapsing */
+        height: auto !important;
         flex-direction: row !important; 
         overflow-x: auto !important;
         padding-bottom: 10px;
