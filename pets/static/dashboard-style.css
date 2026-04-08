@@ -4023,26 +4023,60 @@ body {
     border-color: #ec4899;
 }
 
+/* --- MOBILE DASHBOARD FIX --- */
 @media screen and (max-width: 768px) {
-    .main-content { 
+    
+    /* 1. Stack the main wrapper so sidebar and content are vertical */
+    .dashboard-wrapper { /* Replace with your main container class */
+        flex-direction: column;
+    }
+
+    /* 2. Top Navigation Bar */
+    .top-bar { /* Replace with your top bar class */
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .search-bar { 
+        width: 100% !important; 
+    }
+
+    /* 3. The 3 Stat Cards */
+    .stats-container { /* Replace with the container holding the 3 cards */
         display: flex;
-        flex-direction: column; /* Stacks columns on top of each other instead of side-by-side */
-        padding: 10px;
+        flex-direction: column; /* Stacks them vertically */
+        gap: 15px;
+    }
+    
+    .stat-card {
+        width: 100% !important;
     }
 
-    .column { 
-        width: 100% !important; /* Forces each card/column to take full width */
+    /* 4. Reminders & Pet of the Day Area */
+    .content-grid { /* Replace with the container holding Reminders and Oliver */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .reminders-section, .pet-of-the-day {
+        width: 100% !important;
         margin-bottom: 20px;
-        height: auto !important; /* Prevents the "super stretch" height */
+        height: auto !important; /* Stops the super-stretch */
     }
 
-    /* Adjust the sidebar so it doesn't take up half the screen */
+    /* 5. Mobile Sidebar (Horizontal Icons) */
     .sidebar {
-        width: 60px; 
-        min-width: 60px;
+        width: 100% !important;
+        height: auto !important;
+        display: flex;
+        flex-direction: row; /* Makes it horizontal */
+        overflow-x: auto; /* Allows swiping left/right if there are many icons */
+        padding: 10px;
+        order: 3; /* Moves it to the bottom of the screen */
     }
-
+    
     .sidebar span {
-        display: none; /* Hides text labels in sidebar to save space on mobile */
+        display: none !important; /* Hides text, leaves only the icons */
     }
 }
