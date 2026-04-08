@@ -4103,20 +4103,46 @@ body {
     .match-page-container {
         overflow-y: visible !important;
     }
+    
+    /* Stacks the Header Buttons */
+    .match-page-container .page-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 15px;
+    }
+    .match-page-container .page-header > div:last-child {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+    .match-page-container .btn-animated {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    /* Stacks the Pet List */
     .pets-list-panel {
         width: 100% !important;
     }
     .your-pets-selector {
-        flex-direction: row !important; /* Turns the pet list into a horizontal swipe */
+        flex-direction: row !important; 
         overflow-x: auto !important;
         padding-bottom: 10px;
     }
     .my-pet-card {
         min-width: 200px;
     }
+    
+    /* Fixes the Disappearing Radar Panel */
     .dating-content-layout {
         flex-direction: column !important;
     }
+    .dating-panel {
+        min-height: 500px !important; /* Magic line: Forces the box to stay open! */
+        width: 100% !important;
+        border-radius: 20px !important;
+    }
+
+    /* Fits the Candidate Cards */
     .rewind-sidebar, .candidate-wrapper, .insights-sidebar {
         width: 100% !important;
         max-width: 100% !important;
@@ -4125,7 +4151,7 @@ body {
         width: 100% !important;
     }
     .instruction-overlay p {
-        font-size: 1rem !important; /* Shrink the radar text */
+        font-size: 1rem !important; 
     }
 
     /* 8. Sidebar as a Bottom App Navigation Bar */
