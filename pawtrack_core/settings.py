@@ -77,15 +77,11 @@ WSGI_APPLICATION = 'pawtrack_core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'defaultdb',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_L1z0rYeOKSn9YyaDK-a',
-        'HOST': 'mysql-22447ae0-maynemayne487-06ac.i.aivencloud.com',
-        'PORT': '25229',
-        'OPTIONS': {
-            # Aiven requires SSL, so we must force Django to use it
-            'ssl': {'ssl-mode': 'REQUIRED'}, 
-        },
+        'NAME': 'pawtrack$defaultdb',        
+        'USER': 'pawtrack',                 
+        'PASSWORD': '09458356869Pasumala', 
+        'HOST': 'pawtrack.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
