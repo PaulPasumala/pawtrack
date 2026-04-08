@@ -4023,60 +4023,97 @@ body {
     border-color: #ec4899;
 }
 
-/* --- MOBILE DASHBOARD FIX --- */
+/* ==========================================
+   REAL MOBILE DASHBOARD FIX
+   ========================================== */
 @media screen and (max-width: 768px) {
-    
-    /* 1. Stack the main wrapper so sidebar and content are vertical */
-    .dashboard-wrapper { /* Replace with your main container class */
-        flex-direction: column;
+    /* 1. Body & Main Layout */
+    body {
+        flex-direction: column; /* Stack sidebar and main content */
+        overflow-y: auto;
     }
 
-    /* 2. Top Navigation Bar */
-    .top-bar { /* Replace with your top bar class */
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-    
-    .search-bar { 
-        width: 100% !important; 
+    .main-wrapper {
+        overflow-y: visible;
     }
 
-    /* 3. The 3 Stat Cards */
-    .stats-container { /* Replace with the container holding the 3 cards */
-        display: flex;
-        flex-direction: column; /* Stacks them vertically */
+    /* 2. Top Header */
+    .dashboard-header {
+        height: auto;
+        flex-direction: column;
+        padding: 15px;
         gap: 15px;
     }
-    
-    .stat-card {
+    .search-bar {
         width: 100% !important;
     }
 
-    /* 4. Reminders & Pet of the Day Area */
-    .content-grid { /* Replace with the container holding Reminders and Oliver */
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .reminders-section, .pet-of-the-day {
-        width: 100% !important;
-        margin-bottom: 20px;
-        height: auto !important; /* Stops the super-stretch */
+    /* 3. The Grid Layouts (Fixing the stretch) */
+    .stats-row {
+        grid-template-columns: 1fr; /* Stacks the 3 stat cards */
     }
 
-    /* 5. Mobile Sidebar (Horizontal Icons) */
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stacks the 3 main columns */
+        min-height: auto;
+    }
+
+    .dashboard-col {
+        height: auto; /* Stops vertical stretching */
+    }
+
+    .home-card, .featured-pet-card {
+        height: auto !important; /* Forces cards to wrap content properly */
+        min-height: 250px; /* Gives the pet photo a normal baseline height */
+        margin-bottom: 15px;
+    }
+
+    .featured-info {
+        position: relative;
+        padding-top: 150px; /* Ensures the text doesn't overlap the dog's face */
+    }
+
+    /* 4. Sidebar as a Bottom App Navigation Bar */
     .sidebar {
-        width: 100% !important;
-        height: auto !important;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        order: 3; /* Moves sidebar to the bottom of the screen */
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+        background: linear-gradient(90deg, #192a56 0%, #0d1b3e 100%); 
+    }
+
+    .sidebar-header, .sidebar-footer {
+        display: none; /* Hide logo and logout to save space on mobile */
+    }
+
+    .sidebar-nav {
         display: flex;
-        flex-direction: row; /* Makes it horizontal */
-        overflow-x: auto; /* Allows swiping left/right if there are many icons */
+        flex-direction: row;
+        overflow-x: auto;
         padding: 10px;
-        order: 3; /* Moves it to the bottom of the screen */
+        gap: 5px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .nav-btn {
+        width: auto;
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: 0; /* Hides text so only icons show */
+        justify-content: center;
+    }
+
+    .nav-btn i {
+        font-size: 1.5rem; /* Keep icon visible */
+        margin: 0;
     }
     
-    .sidebar span {
-        display: none !important; /* Hides text, leaves only the icons */
+    .content-display-area {
+        padding: 15px;
+        padding-bottom: 80px; /* Creates space so the bottom nav doesn't cover content */
     }
 }
