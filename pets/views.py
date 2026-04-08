@@ -83,7 +83,10 @@ def dashboard(request):
     archived_pets = PetsAccounts.objects.filter(status='Archived')
 
     if request.user.is_authenticated:
-        # ---> SECURITY FIX: Only fetch Public pets OR the user's own Private pets!
+        # ---> BUG FIX: Ensure the user has a profile record in the new SQLite DB!
+        from .models import UserProfile
+        UserProfile.objects.get_or_create(user=request.user)
+
         active_pets = PetsAccounts.objects.filter(
             Q(status='Available') | Q(owner_username=request.user.username)
         ).exclude(status='Archived')
