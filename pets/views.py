@@ -232,15 +232,16 @@ def move_to_bin(request):
             if pet.owner_username != request.user.username:
                 return JsonResponse({'status': 'error', 'message': 'Permission Denied: You can only delete pets that you registered.'})
 
-            # DATA INTEGRITY CHECK
-            has_apps = AdoptionApplications.objects.filter(pet_name=pet.name).exists()
+            # ---> BUG FIX: Check by the exact pet_id, not the pet's name! <---
+            has_apps = AdoptionApplications.objects.filter(pet_id=pet.pet_id).exists()
+            
             if has_apps:
                 return JsonResponse({
                     'status': 'blocked', 
-                    'message': f"Cannot delete {pet.name}. This pet is currently linked to active Adoption Applications."
+                    'message': f"Cannot delete {pet.name}. This exact pet is currently linked to an active Adoption Application."
                 })
 
-            # Use .update() so it ONLY touches the status column and completely ignores the image!
+            # Use .update() so it ONLY touches the status column
             PetsAccounts.objects.filter(pet_id=pet_id).update(status='Archived')
             
             return JsonResponse({'status': 'success'})
